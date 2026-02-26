@@ -1,39 +1,20 @@
-import { Link } from 'react-scroll';
+import { NavLink } from 'react-router-dom';
+import { HomeIcon, MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline';
 
 function Navbar() {
-    
-        const scrollToTop = () => {
-            window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth' // Optional: adds a smooth scrolling animation
-            });
-        };
 
     return (
         <>
-            <nav className="fixed h-20 w-full bg-gray-700 text-white flex items-center justify-between px-10 z-20">
+            <nav className="fixed h-20 w-full bg-black text-white flex items-center justify-between px-10 z-30">
                 <div>
-                    <button onClick={scrollToTop} className='text-2xl font-bold hover:underline hover:text-blue-400'>
-                        Home
-                    </button>
+                    <NavLink to="/"><HomeIcon className="text-blue-500 bg-gray-800 p-4 rounded-full w-14 h-14 flex justify-center items-center" /></NavLink>
                 </div>
-                <div className="flex justify-center items-center gap-4">
-                    <button>
-                        <Link to="section1" smooth={true} duration={500}>
-                            <h1 className="text-lg font-bold hover:underline hover:text-blue-400">Page 1</h1>
-                        </Link>
-                    </button>
-                    <button>
-                        <Link to="section2" smooth={true} duration={500}>
-                            <h1 className="text-lg font-bold hover:underline hover:text-blue-400">Page 2</h1>
-                        </Link>
-                    </button>
-                    <button>
-                        <Link to="section3" smooth={true} duration={500}>
-                            <h1 className="text-lg font-bold hover:underline hover:text-blue-400">Page 3</h1>
-                        </Link>
-                    </button>
+                <div className='flex justify-center items-center gap-2'>
+                    <MagnifyingGlassIcon className="text-blue-500 bg-gray-800 p-3 rounded-full w-12 h-12 flex justify-center items-center" />
+                    <input type="text" className="border border-2 border-gray-300 rounded-full p-2 w-64" placeholder='Find Something You Want'/>
+                </div>
+                <div>
+                    <NavLink to="/Profile"><UserIcon className='text-blue-500 bg-gray-800 p-3 rounded-full w-14 h-14 flex justify-center items-center' /></NavLink>
                 </div>
             </nav>
         </>

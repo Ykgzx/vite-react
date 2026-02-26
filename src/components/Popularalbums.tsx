@@ -1,0 +1,79 @@
+import { useState } from 'react';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+
+function Popularalbums() {
+  const [songs, setSongs] = useState(
+    [
+      { id: '0', name: '中国风《莫问归期》官方', albums: '蒋雪儿Snow.J', image: 'https://i.scdn.co/image/ab67616d0000b273818e515c6908e4604a1b4077', liked: false,},
+      { id: '1', name: 'Love Me Not', albums: 'Ravyn Lenae', image: 'https://i.ytimg.com/vi/7avJyVkxVA0/maxresdefault.jpg', liked: false,},
+      { id: '2', name: 'back to friends', albums: 'Sombr', image: 'https://i.ytimg.com/vi/fOQ_-gZsnYQ/mqdefault.jpg', liked: false,},
+      { id: '3', name: 'BIRDS OF A FEATHER', albums: 'Billie Eilish', image: 'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c02371bec2e9bf85b37831453', liked: false,},
+      { id: '4', name: 'blue', albums: 'yung kai', image: 'https://i.scdn.co/image/ab67616d0000b273373c63a4666fb7193febc167', liked: false,},
+    ]
+  );
+
+  const toggleLike = (songId: string) => {
+    setSongs(prevSongs =>
+      prevSongs.map(song =>
+        song.id === songId
+          ? {
+              ...song,
+              liked: !song.liked,
+            }
+          : song
+      )
+    );
+  };
+
+  return (
+    <div className="pt-10 pb-12">
+      <h2 className="text-2xl font-bold mb-6 text-white">Popular Albums</h2>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+        {songs.map((albums) => (
+          <div
+            key={albums.id}
+            className="group relative bg-gray-800/80 backdrop-blur-sm rounded-xl overflow-hidden 
+                       border border-gray-700/50 hover:border-indigo-500/50 
+                       transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10"
+          >
+          
+            <button
+              onClick={() => toggleLike(albums.id)}
+              className="absolute top-2 right-2 z-20 p-2 rounded-full 
+                         bg-black/40 hover:bg-black/60 transition-colors
+                         backdrop-blur-sm"
+              aria-label={albums.liked ? "Unlike" : "Like"}
+            >
+              {albums.liked ? (
+                <HeartSolid className="w-6 h-6 text-red-500" />
+              ) : (
+                <HeartIcon className="w-6 h-6 text-gray-300 hover:text-white transition-colors" />
+              )}
+            </button>
+            <div className="aspect-square overflow-hidden">
+              <img
+                src={albums.image}
+                alt={albums.name}
+                className="w-full h-full object-cover transition-transform duration-500 
+                           group-hover:scale-110"
+              />
+            </div>
+
+            <div className="p-4">
+              <h3 className="font-semibold text-white truncate group-hover:text-indigo-400 transition-colors">
+                {albums.name}
+              </h3>
+              <p className="text-sm text-gray-400 mt-1 truncate">
+                {albums.albums}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Popularalbums;
